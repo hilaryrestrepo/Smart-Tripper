@@ -1,313 +1,435 @@
 <!DOCTYPE html>
 
-<html class="light" lang="es"><head>
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>The Editorial Voyager - Decisiones inteligentes para viajeros</title>
+<title>CRM Intelligence Dashboard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-dim": "#d8dadc",
-              "surface-tint": "#0c6780",
-              "surface-bright": "#f7f9fc",
-              "inverse-surface": "#2d3133",
-              "surface-container-low": "#f2f4f6",
-              "outline-variant": "#bfc8cd",
-              "on-error": "#ffffff",
-              "tertiary": "#865300",
-              "on-secondary-fixed": "#002204",
-              "background": "#f7f9fc",
-              "on-background": "#191c1e",
-              "tertiary-fixed": "#ffddb9",
-              "outline": "#6f787d",
-              "secondary": "#006e1c",
-              "secondary-fixed": "#94f990",
-              "on-primary-fixed": "#001f29",
-              "surface-container-highest": "#e0e3e5",
-              "on-tertiary-fixed": "#2b1700",
-              "error-container": "#ffdad6",
-              "on-tertiary-container": "#744700",
-              "on-primary": "#ffffff",
-              "tertiary-fixed-dim": "#ffb961",
-              "inverse-on-surface": "#eff1f3",
-              "primary": "#0c6780",
-              "surface-container-high": "#e6e8ea",
-              "on-tertiary-fixed-variant": "#663e00",
-              "surface-variant": "#e0e3e5",
-              "on-secondary-fixed-variant": "#005313",
-              "inverse-primary": "#89d0ed",
-              "surface-container-lowest": "#ffffff",
-              "tertiary-container": "#ffb65a",
-              "on-surface": "#191c1e",
-              "surface": "#f7f9fc",
-              "on-secondary-container": "#00731e",
-              "on-primary-fixed-variant": "#004d62",
-              "on-surface-variant": "#3f484c",
-              "on-tertiary": "#ffffff",
-              "error": "#ba1a1a",
-              "on-primary-container": "#005870",
-              "on-error-container": "#93000a",
-              "secondary-container": "#91f78e",
-              "primary-container": "#87ceeb",
-              "primary-fixed-dim": "#89d0ed",
-              "on-secondary": "#ffffff",
-              "primary-fixed": "#baeaff",
-              "secondary-fixed-dim": "#78dc77",
-              "surface-container": "#eceef0"
-            },
-            fontFamily: {
-              "headline": ["Plus Jakarta Sans"],
-              "body": ["Manrope"],
-              "label": ["Manrope"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
-    </script>
 <style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      .glass-nav {
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-      .editorial-shadow {
-        box-shadow: 0 12px 32px rgba(25, 28, 30, 0.06);
-      }
-      .bg-gradient-primary {
-        background: linear-gradient(135deg, #0c6780 0%, #87ceeb 100%);
-      }
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
     </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#fefcff",
+                        "surface-tint": "#4059aa",
+                        "tertiary": "#4b1c00",
+                        "on-tertiary-container": "#f39461",
+                        "inverse-on-surface": "#f0f1f3",
+                        "on-primary-fixed": "#00164e",
+                        "inverse-surface": "#2e3132",
+                        "inverse-primary": "#b6c4ff",
+                        "tertiary-fixed": "#ffdbcb",
+                        "surface-container-high": "#e7e8ea",
+                        "on-surface": "#191c1e",
+                        "outline-variant": "#c5c5d3",
+                        "secondary": "#0058be",
+                        "on-tertiary-fixed-variant": "#773205",
+                        "on-secondary-fixed": "#001a42",
+                        "error": "#ba1a1a",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f8f9fb",
+                        "outline": "#757682",
+                        "primary-fixed": "#dce1ff",
+                        "tertiary-container": "#6e2c00",
+                        "on-surface-variant": "#444651",
+                        "primary-container": "#1e3a8a",
+                        "on-primary-fixed-variant": "#264191",
+                        "on-tertiary-fixed": "#341100",
+                        "primary": "#00236f",
+                        "surface-variant": "#e1e2e4",
+                        "background": "#f8f9fb",
+                        "surface-container-highest": "#e1e2e4",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d9dadc",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#90a8ff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b6c4ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb691",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface": "#f8f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f3f4f6",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#edeef0",
+                        "secondary-container": "#2170e4",
+                        "secondary-fixed-dim": "#adc6ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.625rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
 </head>
-<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<body class="bg-surface text-on-surface antialiased">
 <!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#f7f9fc]/80 dark:bg-[#191c1e]/80 backdrop-blur-xl transition-all duration-300">
-<div class="flex justify-between items-center px-6 md:px-10 py-4 w-full max-w-[1440px] mx-auto">
-<div class="text-2xl font-bold text-[#0c6780] dark:text-[#87ceeb] font-headline tracking-tight">
-                The Editorial Voyager
-            </div>
-<div class="hidden md:flex items-center space-x-8 font-headline tracking-tight">
-<a class="text-[#0c6780] dark:text-[#87ceeb] font-bold border-b-2 border-[#0c6780] pb-1" href="#">Explore</a>
-<a class="text-[#40484c] dark:text-[#bfc8cd] hover:text-[#0c6780] transition-all duration-300" href="#">Destinations</a>
-<a class="text-[#40484c] dark:text-[#bfc8cd] hover:text-[#0c6780] transition-all duration-300" href="#">Sustainability</a>
-<a class="text-[#40484c] dark:text-[#bfc8cd] hover:text-[#0c6780] transition-all duration-300" href="#">Journal</a>
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none font-inter antialiased tracking-tight">
+<div class="flex items-center justify-between px-6 py-3 w-full">
+<div class="flex items-center gap-8">
+<span class="text-lg font-bold text-blue-900 dark:text-white">CRM Intelligence Dashboard</span>
+<!-- Global Filters -->
+<div class="hidden lg:flex items-center gap-3">
+<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-xs font-medium">Last 30 Days</span>
+</div>
+<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+<span class="text-xs font-medium">Enterprise Segment</span>
+</div>
+<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm">account_tree</span>
+<span class="text-xs font-medium">Proposal Stage</span>
+</div>
+</div>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 rounded-full hover:bg-[#eceef0] dark:hover:bg-[#40484c] transition-all duration-300 active:scale-90">
-<span class="material-symbols-outlined text-[#40484c] dark:text-[#bfc8cd]">notifications</span>
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:scale-95 duration-200 text-slate-500">
+<span class="material-symbols-outlined">notifications</span>
 </button>
-<button class="p-2 rounded-full hover:bg-[#eceef0] dark:hover:bg-[#40484c] transition-all duration-300 active:scale-90">
-<span class="material-symbols-outlined text-[#40484c] dark:text-[#bfc8cd]">account_circle</span>
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:scale-95 duration-200 text-slate-500">
+<span class="material-symbols-outlined">settings</span>
 </button>
-<button class="md:hidden p-2">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</nav>
-<main class="pt-20">
-<!-- Hero Section -->
-<section class="relative min-h-[870px] flex items-center px-6 md:px-10 overflow-hidden">
-<!-- Asymmetric Image Grid Background -->
-<div class="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-4 p-4 -z-10 opacity-40">
-<div class="col-span-6 row-span-4 rounded-3xl overflow-hidden shadow-2xl">
-<img class="w-full h-full object-cover" data-alt="Crystal clear tropical beach landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDudBbYOLV_qa8enEbyqhx2jECW2CJkkDrPn289oXRPKZbZH1lQkKH7RyNR6tn0sOKgXJMh7gubhiZP0SeulJe7WD2wTt0kCTa-elT3V4DNiIwp-k0zsr34p0qEH2p-bT3BVuOcpwvqoMl-cJ6BpvZLV9G6l5Or7HSvKG6MOC-fv5F6uEDSxMMtPKXcj5nrj676J8cyvmV0qde4PFZZWX-4AnEkVFcNzDDmOnL1zWc0Fh-5PeKcYbklPYfD2UARCFnq3xtoY_3NAgE"/>
-</div>
-<div class="col-span-6 row-span-2 col-start-7 rounded-3xl overflow-hidden shadow-xl">
-<img class="w-full h-full object-cover" data-alt="Modern metropolitan city skyline at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgXxlbAsyIxH2X5DVXUlm1r5yqJRw7aEGBtWiatPhxbeJuNB6nUOcWfl7d_dpOkIbHeyUXkwTqDapdtGIyW9C_xS7bbww780Q8YJN4K1zb3AzInP4r3yWRd1G7EecROKzCJWLsJ_lR81Qf9Mlq-LVmmJgE5gDB9_u1CCuBgstWDD9r0oITZ0H8ECFWT_HpAIOFJlnxINXWvJV48QJbBU5-As5ZYVY0BJdflWR_qbgZ_g48xQbvFJMw-qsXSknQBUFVf_6itn6UJBc"/>
-</div>
-<div class="col-span-3 row-span-4 col-start-7 row-start-3 rounded-3xl overflow-hidden shadow-lg">
-<img class="w-full h-full object-cover" data-alt="Majestic snow covered mountain peaks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQv3DUjFI8QaepqFsm9JkJG1xs93AgNUH-lVvr7JPDv3T-1wykHmOSEI4gxttOZRonP_j2JWVEczVprzLSPRWo8Qvgt2fZWo596b5bQEYKzgP24oFB8caqb2PLTsKczZxlM6p-f1yLDmJ1Abm1SI8XEUcJqULiKVXLI4X9M5nrROZTqpdi4lK_AHOCdXdxL4jUEcaXFanby-gfPGHrMXnVXP2DuFF_jowzRCXvifRrCQEPA6qlNyPKKDjdMoH0NCgMSv_c8liogJA"/>
-</div>
-<div class="col-span-3 row-span-4 col-start-10 row-start-3 rounded-3xl overflow-hidden shadow-lg">
-<img class="w-full h-full object-cover" data-alt="Vast golden desert sand dunes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt9eCuMkpIh2hv9NQ6VeAwKakI6qha_TzKRVwE42JCDpQqdXYbjP_ov4n3N8VZF9IgZutq6RODpLD34YyaSgkc82e7bhBSETRmoOI2bLiHD3m4JAl-yON-BbTsNFH-vWUW8CGKxGfDjwRnHP0pyFqumbrYUq14bCbNonewww343C6nmi_ImY7s8hR4Vh5Ijl0lNWdy8KcQblVY3ZFpIsr2Ne5lHbUrRT6Ctr9HOn11xLQhSiLEmq-9J2ODIbmsgAkDIDSQ4xLqIIM"/>
-</div>
-</div>
-<div class="max-w-4xl mx-auto text-center z-10">
-<span class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed-dim text-on-primary-fixed-variant text-sm font-bold tracking-widest uppercase mb-6 font-headline">
-                    Intelligent Travel
-                </span>
-<h1 class="text-5xl md:text-7xl font-extrabold font-headline text-on-background leading-[1.1] tracking-tight mb-8">
-                    Decisiones inteligentes para <span class="text-primary">viajeros</span>
-</h1>
-<!-- Search Bar -->
-<div class="relative max-w-2xl mx-auto mt-12">
-<div class="bg-surface-container-lowest editorial-shadow rounded-full p-2 flex items-center gap-2 border border-outline-variant/15">
-<div class="flex-1 flex items-center px-6 gap-3">
-<span class="material-symbols-outlined text-primary">location_on</span>
-<input class="w-full border-none focus:ring-0 bg-transparent text-on-surface font-body text-lg py-3" placeholder="¿A dónde te lleva tu curiosidad?" type="text"/>
-</div>
-<button class="bg-gradient-primary text-white px-8 py-3 rounded-full font-headline font-bold hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
-<span>Explorar</span>
-<span class="material-symbols-outlined">arrow_forward</span>
-</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-3 pl-2 cursor-pointer">
+<img alt="User profile" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a professional male executive in a navy blue suit with a clean office background, sharp focus, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXm2T2L3B5T6Dc5gM0k5jzvy8crgXuWiMADmDAFigU2Krts6dJbGoCfK3h6OHWYrZQII-rlr53BRG-YlZqMYmy2VcTE6B1PsmeRlNq9-qO8NE3BRj2xOoqaqDsUNl7abpsYM8QFqpECQiKnQNSpcHd6_fuH9_DB_Hae_wcJt7h5aiMEZ4L9wET5VzLzEHC0GDzZdwOXB9VwC3oCJqHxkgtRSm2efdWI9ux4MutcUQbsqX41AMq3KQDn9paTW11Ld2OELiBRMbmr1M"/>
 </div>
 </div>
 </div>
-</section>
-<!-- Category Sidebar / Content Area Layout -->
-<section class="max-w-[1440px] mx-auto px-6 md:px-10 py-20 flex flex-col md:flex-row gap-12">
-<!-- SideNav Simulation -->
-<aside class="w-full md:w-64 flex flex-col gap-6">
+<div class="bg-slate-100/50 dark:bg-slate-800/50 h-[1px]"></div>
+</header>
+<div class="flex pt-16">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 pt-16 h-full w-64 bg-slate-50 dark:bg-slate-950 flex flex-col gap-2 p-4 font-inter text-sm font-medium z-40">
+<div class="mb-6 px-4 pt-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">architecture</span>
+</div>
 <div>
-<h3 class="font-headline text-xl font-bold text-on-background">Categories</h3>
-<p class="text-on-surface-variant text-sm font-medium">Curated Collections</p>
+<p class="text-on-surface font-bold leading-none">Executive Architect</p>
+<p class="text-[10px] text-on-surface-variant tracking-wider uppercase mt-1">Premium CRM</p>
 </div>
-<nav class="flex flex-col gap-2">
-<a class="flex items-center gap-4 bg-white dark:bg-[#2e3133] text-[#0c6780] rounded-l-full pl-4 py-3 shadow-sm font-medium transition-all" href="#">
-<span class="material-symbols-outlined">beach_access</span>
-<span>Beaches</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-blue-900 dark:text-blue-400 border-l-2 border-blue-900 dark:border-blue-400 font-semibold bg-transparent transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
 </a>
-<a class="flex items-center gap-4 text-[#40484c] dark:text-[#bfc8cd] pl-8 py-3 hover:text-[#0c6780] transition-all" href="#">
-<span class="material-symbols-outlined">apartment</span>
-<span>Cities</span>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Customers</span>
 </a>
-<a class="flex items-center gap-4 text-[#40484c] dark:text-[#bfc8cd] pl-8 py-3 hover:text-[#0c6780] transition-all" href="#">
-<span class="material-symbols-outlined">wb_sunny</span>
-<span>Deserts</span>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Sales Pipeline</span>
 </a>
-<a class="flex items-center gap-4 text-[#40484c] dark:text-[#bfc8cd] pl-8 py-3 hover:text-[#0c6780] transition-all" href="#">
-<span class="material-symbols-outlined">terrain</span>
-<span>Mountains</span>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">event_repeat</span>
+<span>Follow-ups</span>
 </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Reports</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
 </nav>
-<!-- Curator Info -->
-<div class="mt-8 p-6 bg-surface-container-low rounded-3xl">
-<div class="flex items-center gap-3 mb-4">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+<!-- Main Content Area -->
+<main class="ml-64 w-full min-h-screen p-8 bg-surface">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-[2.75rem] font-bold text-primary tracking-tight leading-tight mb-2">Executive Insights</h1>
+<p class="text-on-surface-variant font-medium">Analyzing real-time performance across your global sales infrastructure.</p>
 </div>
-<span class="font-headline font-bold text-sm">Sustainability First</span>
+<!-- KPI Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Total Customers</p>
+<h2 class="text-3xl font-bold text-on-surface">1,245</h2>
 </div>
-<p class="text-xs text-on-surface-variant leading-relaxed">
-                        Every destination in our month's featured list is vetted for sustainable tourism impact.
-                    </p>
-</div>
-</aside>
-<!-- Main Content: Bento Grid -->
-<div class="flex-1">
-<div class="flex justify-between items-end mb-10">
-<h2 class="text-3xl font-headline font-bold text-on-background">Destinos del mes</h2>
-<a class="text-primary font-bold flex items-center gap-1 hover:underline" href="#">
-                        Ver todos <span class="material-symbols-outlined text-sm">open_in_new</span>
-</a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Featured Destination Large -->
-<div class="md:col-span-2 group relative h-[450px] rounded-3xl overflow-hidden editorial-shadow cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Breathtaking landscape of Bali rice terraces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWYdpf3DTogU1XnnJU98Q2QnVSdtAFmZUhXbGLo5tG4EsAWu2Td4JkOl8BzQFXmdw3Zvz6kFFEyK_YCW-FsNLngWi_luGxhQCCXRg-NAyGG26cH4qPVOftFDptD7U5O5hLl6BtBomZEoQKg2ZMnaeVCJbHpIXu0BCQYuz8HxBwaDSmL0xTPaHh9vHZkan3fm1eOZ9fSFlN0D9U0U1Wz_spI3OVguDB93ugwAyuI__AnWYuXls2HiH8DU-bh324QOkZRaGN6EE09Ps"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-8 w-full">
-<div class="flex gap-2 mb-4">
-<span class="px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Eco-Trend</span>
-<span class="px-3 py-1 bg-white/20 backdrop-blur text-white text-[10px] font-bold uppercase tracking-widest rounded-full">Top 1</span>
-</div>
-<h3 class="text-4xl font-headline font-extrabold text-white mb-2">Bali, Indonesia</h3>
-<p class="text-white/80 text-sm max-w-md line-clamp-2">Descubre la serenidad de los templos y la exuberante naturaleza de la isla de los dioses con nuestro guía inteligente.</p>
+<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span>+12%</span>
+<span class="text-on-surface-variant font-normal ml-auto">vs prev month</span>
 </div>
 </div>
-<!-- Destination Small 1 -->
-<div class="group relative h-[450px] rounded-3xl overflow-hidden editorial-shadow cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Traditional architecture in Kyoto Japan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2FL4Hfj8ZPxxMqgX2WfEl8Zqi28R8x0qLym_kncr493GVFYAXcYHaoSYxhi_C0NqWXgiaOukD8ZT7szPIjWqiOhHSI0UVSBBpft88rKk3pI4rYeMuU75yNd7xwZE0OZdaz_2kiJFhGlmWrCmutGc5bpEYnWBkcCJ0JRv-Y7ulJMm0mFBkdPOtJ6vrzJ2kdePZi7RqjQwXaQ0AqThVWqJTb2vm4asPnxxS_RHeg5Bhzj6KIMoEEyNJZQUpi_DhV1LZ8it4ry8LS1A"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6">
-<span class="px-2 py-1 bg-secondary text-white text-[10px] font-bold uppercase rounded-md mb-2 inline-block">Cultural</span>
-<h3 class="text-2xl font-headline font-bold text-white">Kyoto, Japón</h3>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow border-l-4 border-primary">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Active Opportunities</p>
+<h2 class="text-3xl font-bold text-on-surface">348</h2>
+</div>
+<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span>+5%</span>
+<span class="text-on-surface-variant font-normal ml-auto">Active now</span>
 </div>
 </div>
-<!-- Destination Small 2 -->
-<div class="group relative h-[300px] rounded-3xl overflow-hidden editorial-shadow cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Santorini white buildings and blue sea" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7MJdofvJuViZiRezBGYcSc_yPsjdtq6AUQjJAha-OBNPFxxs0E271V9u8-7S5ZdKAt4o4AA4RwFWFk__OgCmQdhC8YmoTR9x_C76tX6_i_Z0fTOs-hQs41iOx6qwYPm-T6jgrXv4LQ2V_7SNsSnSdbgb66OKmCeib0PUK13-Ax-xOWXFJo3xox2Dd7g1DqMISHLelGCW9bIlaJlm4CWmj7xHeLlUYpseo62il6I3-Erd4wS2JFxF_Z6id1JsLLH9QZQZLFzQlhuU"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6">
-<h3 class="text-xl font-headline font-bold text-white">Santorini, Grecia</h3>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Retention Rate</p>
+<h2 class="text-3xl font-bold text-on-surface">94%</h2>
+</div>
+<div class="mt-6 flex items-center gap-2 text-error font-semibold text-sm">
+<span class="material-symbols-outlined text-lg">trending_down</span>
+<span>-2%</span>
+<span class="text-on-surface-variant font-normal ml-auto">Churn risk alert</span>
 </div>
 </div>
-<!-- Destination Small 3 -->
-<div class="group relative h-[300px] rounded-3xl overflow-hidden editorial-shadow cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Grand canal in Venice Italy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY5bKj_5DgQMjDurtOq6YN1IzgW7NNQp-gHZw0JhRz2um2uRdB70satY_EIgqktgK-YH1n-dfDOTAZTOOAgoja_tAhaiJufIMDGzoxhLxvpWY9axyno08WUlHIQvAzN1YlD3sYzK_7BYxeZXtasJM5A0kPa4T6dXdHp5Fpui5gBsSpWFGX1LdXu7P8ehrMQ9YgTZNjGADX9PNqitUrmsupYPyHEIUqmG5GpUxF7aBqN9XlJOg8QXXAAXm7ggnOGNMku7WXA4jAJ28"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6">
-<h3 class="text-xl font-headline font-bold text-white">Venecia, Italia</h3>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Customer Lifetime Value</p>
+<h2 class="text-3xl font-bold text-on-surface">$14.2k</h2>
 </div>
-</div>
-<!-- Destination Small 4 -->
-<div class="group relative h-[300px] rounded-3xl overflow-hidden editorial-shadow cursor-pointer">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Dolomites mountain range landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWJeJ9CXbRl49dYj66UOFSzUopf9lsbTiV-WqUY0YbP_eCA9DDxugKR_2iJCibny1v4TbwqzV_0lLde-RpCCWQLpk6gHn98TYu4V69DdK1mD5dj1EbR8rO3FKKSW1qSp9xt29txdf0OR9zyHSVy6MctHW09e2CGeuUqQKdL2CCQEpKWcqnhgNOSiMX4s59klt6ZNwTemcwOISEYXGCuwcapmuBj9-1233MAH1L9biiYabrDtzjzVRbKWCCiLBG45VMnpyiFWKRhbE"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6">
-<h3 class="text-xl font-headline font-bold text-white">Dolomitas, Italia</h3>
+<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span>+8%</span>
+<span class="text-on-surface-variant font-normal ml-auto">Avg. revenue</span>
 </div>
 </div>
 </div>
-<!-- Savings Tips Section -->
-<div class="mt-24">
-<div class="bg-surface-container rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center gap-12 border border-outline-variant/10">
-<div class="flex-1">
-<div class="flex items-center gap-2 mb-4">
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">savings</span>
-<h2 class="text-3xl font-headline font-bold text-on-background">Tips para ahorrar en vuelos</h2>
+<!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+<!-- Sales Performance -->
+<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg text-on-surface">Sales Performance</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
 </div>
-<p class="text-on-surface-variant text-lg leading-relaxed mb-8">
-                                Nuestro algoritmo analiza miles de rutas para darte la ventaja competitiva. Viaja más pagando menos con estas estrategias curadas por expertos.
-                            </p>
-<ul class="space-y-4 mb-8">
-<li class="flex gap-4">
-<div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-sm">check</span>
-</div>
-<span class="text-on-surface font-medium">Reserva con 45 días de antelación para rutas internacionales.</span>
-</li>
-<li class="flex gap-4">
-<div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-sm">check</span>
-</div>
-<span class="text-on-surface font-medium">Utiliza el modo incógnito y limpia tus cookies regularmente.</span>
-</li>
-<li class="flex gap-4">
-<div class="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-secondary text-sm">check</span>
-</div>
-<span class="text-on-surface font-medium">Vuela en martes o miércoles para ahorrar hasta un 25%.</span>
-</li>
-</ul>
-<button class="bg-on-surface text-surface-container-lowest px-8 py-4 rounded-full font-headline font-bold hover:bg-on-surface-variant transition-all">
-                                Leer reporte completo
-                            </button>
-</div>
-<div class="w-full md:w-1/3 aspect-square relative">
-<div class="absolute inset-0 bg-secondary/5 rounded-full scale-110"></div>
-<img class="w-full h-full object-cover rounded-3xl editorial-shadow rotate-3 hover:rotate-0 transition-transform duration-500" data-alt="Airplane wing flying above clouds at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX6WvR-Pc7yvmdrQ26VSq2jJZ_foiqeHBjbC6U8E1-kAFls1jPLwPGByVUvf2_gdRRkNYioqAPkWM0K2_EZdD_Qq7nN-F837JLtwta9MZH04XlIdlaeu2nkN7EubbTBmRV6Z8PVoPKxlHiMdaBLeDhvsyVJOq03Gq76pRKUULZPAwLB6Aarw1Bt3UCcfbb3g-HBltlzvcZfBXxEAby5C6MNI-8MVZ3vrxceXMTwpoxRs_JZk5rr-GwXPFgLjG2s1ajyPQlTQF7jvk"/>
+<div class="h-48 flex items-end justify-between gap-1 px-2 relative">
+<!-- Simulated Line Chart -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
+<path d="M0 160 Q 50 140, 100 150 T 200 100 T 300 80 T 400 40" fill="none" stroke="#00236f" stroke-linecap="round" stroke-width="3"></path>
+<path d="M0 160 Q 50 140, 100 150 T 200 100 T 300 80 T 400 40 V 200 H 0 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#00236f;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#00236f;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="w-full mt-48 flex justify-between text-[10px] text-on-surface-variant font-bold uppercase">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
 </div>
 </div>
 </div>
+<!-- Monthly Acquisition -->
+<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg text-on-surface">Monthly Acquisition</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
 </div>
-</section>
+<div class="h-48 flex items-end justify-around gap-2 px-2">
+<div class="w-full bg-secondary-container rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-secondary-container rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-primary rounded-t-sm h-[85%]"></div>
+<div class="w-full bg-secondary-container rounded-t-sm h-[50%]"></div>
+<div class="w-full bg-secondary-container rounded-t-sm h-[70%]"></div>
+<div class="w-full bg-secondary-container rounded-t-sm h-[95%]"></div>
+</div>
+<div class="mt-4 flex justify-between text-[10px] text-on-surface-variant font-bold uppercase">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+</div>
+</div>
+<!-- Segmentation -->
+<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg text-on-surface">Segmentation</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
+</div>
+<div class="flex flex-col items-center justify-center h-48 relative">
+<div class="w-32 h-32 rounded-full border-[12px] border-primary flex items-center justify-center">
+<div class="text-center">
+<span class="block text-2xl font-bold">64%</span>
+<span class="text-[10px] text-on-surface-variant uppercase font-bold">Enterprise</span>
+</div>
+</div>
+<div class="mt-6 flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Corp</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">SME</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Customer Insights Table -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg text-on-surface">Customer Insights</h3>
+<button class="text-primary text-sm font-semibold hover:underline">View All Leads</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+<th class="pb-6">Name</th>
+<th class="pb-6">Status</th>
+<th class="pb-6">Last Interaction</th>
+<th class="pb-6">Rep</th>
+<th class="pb-6 text-right">Value</th>
+</tr>
+</thead>
+<tbody class="text-sm font-medium">
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+</div>
+<span>Aurora Global</span>
+</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
+</td>
+<td class="py-4 text-on-surface-variant">2 hours ago</td>
+<td class="py-4">M. Chen</td>
+<td class="py-4 text-right font-bold text-primary">$45,000</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">corporate_fare</span>
+</div>
+<span>Vortex Tech</span>
+</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold rounded uppercase">Proposal</span>
+</td>
+<td class="py-4 text-on-surface-variant">Yesterday</td>
+<td class="py-4">S. Miller</td>
+<td class="py-4 text-right font-bold text-primary">$12,500</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+</div>
+<span>Lumina Systems</span>
+</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-orange-100 text-orange-700 text-[10px] font-bold rounded uppercase">Waiting</span>
+</td>
+<td class="py-4 text-on-surface-variant">3 days ago</td>
+<td class="py-4">M. Chen</td>
+<td class="py-4 text-right font-bold text-primary">$8,200</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+</div>
+<span>Zenith Retail</span>
+</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
+</td>
+<td class="py-4 text-on-surface-variant">1 week ago</td>
+<td class="py-4">K. Patel</td>
+<td class="py-4 text-right font-bold text-primary">$29,100</td>
+</tr>
+<tr class="group hover:bg-slate-50 transition-colors">
+<td class="py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">domain</span>
+</div>
+<span>Nova Logistics</span>
+</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded uppercase">Cold</span>
+</td>
+<td class="py-4 text-on-surface-variant">2 weeks ago</td>
+<td class="py-4">S. Miller</td>
+<td class="py-4 text-right font-bold text-primary">$4,500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Follow-up Panel -->
+<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-bold text-lg text-on-surface">Follow-up Panel</h3>
+<span class="material-symbols-outlined text-primary cursor-pointer">add_circle</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 rounded-lg bg-surface-container-low border-l-4 border-error">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm">Contract Renewal</h4>
+<span class="px-2 py-0.5 bg-error-container text-error text-[9px] font-bold rounded uppercase">Urgent</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Finalize Aurora Global terms for Q4.</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">schedule</span>
+<span class="text-[10px] font-medium">Due in 2h</span>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border-l-4 border-primary">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm">Discovery Call</h4>
+<span class="px-2 py-0.5 bg-primary-fixed text-primary text-[9px] font-bold rounded uppercase">Pending</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Initial brief with Vortex Tech lead.</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">schedule</span>
+<span class="text-[10px] font-medium">Tomorrow, 10 AM</span>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low opacity-60">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-bold text-sm line-through">Report Export</h4>
+<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[9px] font-bold rounded uppercase">Completed</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Monthly sales summary sent.</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-green-600">check_circle</span>
+<span class="text-[10px] font-medium">Done at 9 AM</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-3 border-2 border-outline-variant border-dashed rounded-lg text-xs font-bold text-on-surface-variant hover:bg-slate-50 transition-colors">
+                        View Full Schedule
+                    </button>
+</div>
+</div>
 </main>
-<!-- Footer -->
-<footer class="w-full mt-auto py-12 px-10 bg-[#eceef0] dark:bg-[#000000] border-t border-[#bfc8cd]/15">
-<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-<div>
-<span class="font-headline font-bold text-2xl text-[#0c6780] block mb-2">The Editorial Voyager</span>
-<p class="font-manrope text-xs uppercase tracking-widest text-[#70787d] dark:text-[#8e9192]">
-                    © 2024 The Editorial Voyager. All rights reserved.
-                </p>
 </div>
-<div class="flex flex-wrap gap-x-8 gap-y-4 justify-start md:justify-end">
-<a class="font-manrope text-xs uppercase tracking-widest text-[#70787d] dark:text-[#8e9192] hover:text-[#0c6780] transition-opacity opacity-80 hover:opacity-100" href="#">Travel Tips</a>
-<a class="font-manrope text-xs uppercase tracking-widest text-[#70787d] dark:text-[#8e9192] hover:text-[#0c6780] transition-opacity opacity-80 hover:opacity-100" href="#">Newsletter</a>
-<a class="font-manrope text-xs uppercase tracking-widest text-[#70787d] dark:text-[#8e9192] hover:text-[#0c6780] transition-opacity opacity-80 hover:opacity-100" href="#">Sustainability Report</a>
-<a class="font-manrope text-xs uppercase tracking-widest text-[#70787d] dark:text-[#8e9192] hover:text-[#0c6780] transition-opacity opacity-80 hover:opacity-100" href="#">Contact</a>
-</div>
-</div>
-</footer>
 </body></html>
