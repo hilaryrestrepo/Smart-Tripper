@@ -1,435 +1,552 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="light" lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CRM Intelligence Dashboard</title>
+<title>Amcor Executive | Dashboard de Clientes</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Manrope:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Scripts -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#f7f9fb",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#91da40",
+              "on-tertiary-container": "#ffb98d",
+              "secondary": "#3d6a00",
+              "outline-variant": "#c1c7d2",
+              "on-secondary": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#406e00",
+              "on-primary-fixed": "#001c37",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed-variant": "#004880",
+              "surface-container-lowest": "#ffffff",
+              "outline": "#727781",
+              "on-error-container": "#93000a",
+              "on-background": "#191c1e",
+              "inverse-primary": "#a1c9ff",
+              "inverse-surface": "#2d3133",
+              "surface-container": "#eceef0",
+              "inverse-on-surface": "#eff1f3",
+              "tertiary-fixed": "#ffdbc7",
+              "on-tertiary-fixed": "#311300",
+              "secondary-fixed": "#acf75a",
+              "primary-container": "#005696",
+              "error-container": "#ffdad6",
+              "primary-fixed-dim": "#a1c9ff",
+              "surface-container-highest": "#e0e3e5",
+              "on-primary-container": "#a5cbff",
+              "surface-dim": "#d8dadc",
+              "on-surface": "#191c1e",
+              "primary": "#003e6f",
+              "surface-container-low": "#f2f4f6",
+              "on-surface-variant": "#414750",
+              "secondary-container": "#aaf457",
+              "on-secondary-fixed": "#0f2000",
+              "surface-variant": "#e0e3e5",
+              "on-secondary-fixed-variant": "#2d5000",
+              "tertiary-fixed-dim": "#ffb688",
+              "surface-tint": "#1961a1",
+              "surface-bright": "#f7f9fb",
+              "tertiary-container": "#874001",
+              "error": "#ba1a1a",
+              "surface-container-high": "#e6e8ea",
+              "surface": "#f7f9fb",
+              "tertiary": "#642d00",
+              "on-tertiary-fixed-variant": "#733500",
+              "primary-fixed": "#d2e4ff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
 <style>
-        body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
-        .glass-panel {
+        .glass-header {
             background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(20px);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        h1, h2, h3, .display-text {
+            font-family: 'Manrope', sans-serif;
         }
     </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "on-secondary-container": "#fefcff",
-                        "surface-tint": "#4059aa",
-                        "tertiary": "#4b1c00",
-                        "on-tertiary-container": "#f39461",
-                        "inverse-on-surface": "#f0f1f3",
-                        "on-primary-fixed": "#00164e",
-                        "inverse-surface": "#2e3132",
-                        "inverse-primary": "#b6c4ff",
-                        "tertiary-fixed": "#ffdbcb",
-                        "surface-container-high": "#e7e8ea",
-                        "on-surface": "#191c1e",
-                        "outline-variant": "#c5c5d3",
-                        "secondary": "#0058be",
-                        "on-tertiary-fixed-variant": "#773205",
-                        "on-secondary-fixed": "#001a42",
-                        "error": "#ba1a1a",
-                        "on-background": "#191c1e",
-                        "surface-bright": "#f8f9fb",
-                        "outline": "#757682",
-                        "primary-fixed": "#dce1ff",
-                        "tertiary-container": "#6e2c00",
-                        "on-surface-variant": "#444651",
-                        "primary-container": "#1e3a8a",
-                        "on-primary-fixed-variant": "#264191",
-                        "on-tertiary-fixed": "#341100",
-                        "primary": "#00236f",
-                        "surface-variant": "#e1e2e4",
-                        "background": "#f8f9fb",
-                        "surface-container-highest": "#e1e2e4",
-                        "on-error": "#ffffff",
-                        "surface-dim": "#d9dadc",
-                        "on-error-container": "#93000a",
-                        "on-primary-container": "#90a8ff",
-                        "on-tertiary": "#ffffff",
-                        "primary-fixed-dim": "#b6c4ff",
-                        "on-secondary": "#ffffff",
-                        "tertiary-fixed-dim": "#ffb691",
-                        "on-secondary-fixed-variant": "#004395",
-                        "surface": "#f8f9fb",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-fixed": "#d8e2ff",
-                        "on-primary": "#ffffff",
-                        "surface-container-low": "#f3f4f6",
-                        "error-container": "#ffdad6",
-                        "surface-container": "#edeef0",
-                        "secondary-container": "#2170e4",
-                        "secondary-fixed-dim": "#adc6ff"
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.625rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
-            },
-        }
-    </script>
 </head>
-<body class="bg-surface text-on-surface antialiased">
+<body class="text-on-surface">
 <!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none font-inter antialiased tracking-tight">
-<div class="flex items-center justify-between px-6 py-3 w-full">
-<div class="flex items-center gap-8">
-<span class="text-lg font-bold text-blue-900 dark:text-white">CRM Intelligence Dashboard</span>
-<!-- Global Filters -->
-<div class="hidden lg:flex items-center gap-3">
-<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-sm">calendar_today</span>
-<span class="text-xs font-medium">Last 30 Days</span>
-</div>
-<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-sm">filter_alt</span>
-<span class="text-xs font-medium">Enterprise Segment</span>
-</div>
-<div class="flex items-center bg-surface-container-highest px-3 py-1.5 rounded-lg gap-2 cursor-pointer hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-sm">account_tree</span>
-<span class="text-xs font-medium">Proposal Stage</span>
-</div>
-</div>
-</div>
+<nav class="fixed top-0 w-full z-50 glass-header shadow-sm h-20 border-b border-surface-container">
+<div class="flex justify-between items-center px-8 h-full w-full max-w-screen-2xl mx-auto">
 <div class="flex items-center gap-4">
-<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:scale-95 duration-200 text-slate-500">
+<span class="text-2xl font-bold tracking-tight text-primary">Amcor Executive</span>
+<div class="hidden md:flex gap-8 ml-12 items-center">
+<a class="text-primary font-bold border-b-2 border-primary py-2 text-sm font-medium" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-medium" href="#">Client Relations</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-medium" href="#">Performance</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-medium" href="#">Reports</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-sm w-64 focus:ring-2 focus:ring-primary" placeholder="Buscar cliente..." type="text"/>
+</div>
+<div class="flex gap-4 text-on-surface-variant">
+<button class="hover:bg-surface-container-high p-2 rounded-full transition-colors">
 <span class="material-symbols-outlined">notifications</span>
 </button>
-<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full transition-colors active:scale-95 duration-200 text-slate-500">
+<button class="hover:bg-surface-container-high p-2 rounded-full transition-colors">
 <span class="material-symbols-outlined">settings</span>
 </button>
-<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
-<div class="flex items-center gap-3 pl-2 cursor-pointer">
-<img alt="User profile" class="w-8 h-8 rounded-full object-cover" data-alt="Close-up portrait of a professional male executive in a navy blue suit with a clean office background, sharp focus, neutral lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXm2T2L3B5T6Dc5gM0k5jzvy8crgXuWiMADmDAFigU2Krts6dJbGoCfK3h6OHWYrZQII-rlr53BRG-YlZqMYmy2VcTE6B1PsmeRlNq9-qO8NE3BRj2xOoqaqDsUNl7abpsYM8QFqpECQiKnQNSpcHd6_fuH9_DB_Hae_wcJt7h5aiMEZ4L9wET5VzLzEHC0GDzZdwOXB9VwC3oCJqHxkgtRSm2efdWI9ux4MutcUQbsqX41AMq3KQDn9paTW11Ld2OELiBRMbmr1M"/>
+<div class="h-10 w-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img alt="Executive Profile" data-alt="Corporate executive professional headshot portrait with blurred office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_558jvWkTy4aSY_Kp6H_jKGQUJzRxCkJjCjHYwfHa8O2QcMEyYRVZxl3abHVPCqDvJxO6rROCzCi1RYhpxmpfD8caOC2URf4NnoWE9vxSUovzJpAut-uy5FcquV4TtBAiTr4Rgszn1npqMlyUkwR5KUKjbIGEoSc32DC8J2wbZMFIo57ZMEKgPR_2ONjVuaGrS7haWjrOmcsCF1RiBCwBeYR7qtqa7GIUZP9zlN7w_qcLCtRdOWhCKQ2rFNE94PLahXNzGARYOqPr"/>
 </div>
 </div>
 </div>
-<div class="bg-slate-100/50 dark:bg-slate-800/50 h-[1px]"></div>
-</header>
-<div class="flex pt-16">
-<!-- SideNavBar -->
-<nav class="fixed left-0 top-0 pt-16 h-full w-64 bg-slate-50 dark:bg-slate-950 flex flex-col gap-2 p-4 font-inter text-sm font-medium z-40">
-<div class="mb-6 px-4 pt-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">architecture</span>
-</div>
-<div>
-<p class="text-on-surface font-bold leading-none">Executive Architect</p>
-<p class="text-[10px] text-on-surface-variant tracking-wider uppercase mt-1">Premium CRM</p>
-</div>
-</div>
-</div>
-<a class="flex items-center gap-3 px-4 py-3 text-blue-900 dark:text-blue-400 border-l-2 border-blue-900 dark:border-blue-400 font-semibold bg-transparent transition-all" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span>Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
-<span class="material-symbols-outlined">group</span>
-<span>Customers</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
-<span class="material-symbols-outlined">payments</span>
-<span>Sales Pipeline</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
-<span class="material-symbols-outlined">event_repeat</span>
-<span>Follow-ups</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
-<span class="material-symbols-outlined">bar_chart</span>
-<span>Reports</span>
-</a>
-<div class="mt-auto">
-<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-300 hover:translate-x-1 transition-all cursor-pointer" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span>Settings</span>
-</a>
 </div>
 </nav>
-<!-- Main Content Area -->
-<main class="ml-64 w-full min-h-screen p-8 bg-surface">
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden xl:flex flex-col p-6 gap-4 h-screen w-64 fixed left-0 top-0 pt-28 bg-surface-container-low/50 backdrop-blur-md border-r border-surface-container">
+<div class="mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h3 class="font-manrope font-extrabold text-primary text-sm">Editorial Intel</h3>
+<p class="text-xs text-on-surface-variant">Executive View</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-white text-primary font-semibold rounded-lg shadow-sm transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:pl-6 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="text-sm">Clientes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:pl-6 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="text-sm">Desempeño</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high hover:pl-6 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm">Informes</span>
+</a>
+</nav>
+<div class="border-t border-surface-container pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm">Soporte</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pt-28 pb-12 px-8 xl:ml-64 max-w-screen-2xl mx-auto">
 <!-- Header Section -->
-<div class="mb-10">
-<h1 class="text-[2.75rem] font-bold text-primary tracking-tight leading-tight mb-2">Executive Insights</h1>
-<p class="text-on-surface-variant font-medium">Analyzing real-time performance across your global sales infrastructure.</p>
+<header class="mb-10">
+<h1 class="text-4xl font-extrabold text-primary tracking-tight mb-2">Dashboard de Clientes Amcor</h1>
+<p class="text-on-surface-variant text-lg font-light">Seguimiento de servicio, recurrencia y valor relacional del cliente</p>
+</header>
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<!-- KPI 1: Retention -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-primary group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-medium text-sm">Tasa de Retención</span>
+<span class="bg-primary-fixed text-primary px-2 py-1 rounded text-xs font-bold">+2.4% vs 6m</span>
 </div>
-<!-- KPI Cards Row -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-<!-- KPI 1 -->
-<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-primary tracking-tighter" id="kpi-retention">94.2%</span>
+</div>
+<p class="text-xs text-outline mt-4 font-medium uppercase tracking-wider">Comparación 6 meses</p>
+<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 94%;"></div>
+</div>
+</div>
+<!-- KPI 2: CLV Proxy -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-secondary group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-medium text-sm">Relational Index (CMR)</span>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-xs font-bold">Óptimo</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-secondary tracking-tighter" id="kpi-clv">8.8</span>
+<span class="text-lg text-on-surface-variant font-medium">/10</span>
+</div>
+<p class="text-xs text-outline mt-4 font-medium uppercase tracking-wider">Frecuencia &amp; Antigüedad</p>
+<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 88%;"></div>
+</div>
+</div>
+<!-- KPI 3: DIFOT -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm border-b-4 border-tertiary-container group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-medium text-sm">DIFOT Average YTD</span>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded text-xs font-bold">-1.2% Target</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-tertiary-container tracking-tighter" id="kpi-difot">87.5%</span>
+</div>
+<p class="text-xs text-outline mt-4 font-medium uppercase tracking-wider">D DIFOT_YTD_LT</p>
+<div class="mt-4 h-1 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-container" style="width: 87%;"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Charts -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-10">
+<!-- Main Chart: Order Frequency Comparison -->
+<div class="lg:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<div class="flex justify-between items-center mb-8">
 <div>
-<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Total Customers</p>
-<h2 class="text-3xl font-bold text-on-surface">1,245</h2>
+<h3 class="text-xl font-bold text-primary">Detección de Caídas en Recurrencia</h3>
+<p class="text-sm text-on-surface-variant">Últimos 6 meses vs Periodo Anterior</p>
 </div>
-<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
-<span class="material-symbols-outlined text-lg">trending_up</span>
-<span>+12%</span>
-<span class="text-on-surface-variant font-normal ml-auto">vs prev month</span>
-</div>
-</div>
-<!-- KPI 2 -->
-<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow border-l-4 border-primary">
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Active Opportunities</p>
-<h2 class="text-3xl font-bold text-on-surface">348</h2>
-</div>
-<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
-<span class="material-symbols-outlined text-lg">trending_up</span>
-<span>+5%</span>
-<span class="text-on-surface-variant font-normal ml-auto">Active now</span>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-xs font-medium text-on-surface-variant">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span> Actual
+                        </span>
+<span class="flex items-center gap-1 text-xs font-medium text-on-surface-variant">
+<span class="w-3 h-3 rounded-full bg-outline-variant"></span> Anterior
+                        </span>
 </div>
 </div>
-<!-- KPI 3 -->
-<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Retention Rate</p>
-<h2 class="text-3xl font-bold text-on-surface">94%</h2>
-</div>
-<div class="mt-6 flex items-center gap-2 text-error font-semibold text-sm">
-<span class="material-symbols-outlined text-lg">trending_down</span>
-<span>-2%</span>
-<span class="text-on-surface-variant font-normal ml-auto">Churn risk alert</span>
+<div class="h-[350px]">
+<canvas id="frequencyChart"></canvas>
 </div>
 </div>
-<!-- KPI 4 -->
-<div class="bg-surface-container-lowest p-8 rounded-[0.625rem] shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
-<div>
-<p class="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">Customer Lifetime Value</p>
-<h2 class="text-3xl font-bold text-on-surface">$14.2k</h2>
+<!-- Insights Block -->
+<div class="lg:col-span-4 bg-primary text-white p-8 rounded-xl shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-9xl">lightbulb</span>
 </div>
-<div class="mt-6 flex items-center gap-2 text-secondary font-semibold text-sm">
-<span class="material-symbols-outlined text-lg">trending_up</span>
-<span>+8%</span>
-<span class="text-on-surface-variant font-normal ml-auto">Avg. revenue</span>
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">insights</span>
+                    Executive Insights
+                </h3>
+<div class="space-y-6 relative z-10">
+<div class="border-l-2 border-secondary-fixed pl-4">
+<p class="text-xs uppercase tracking-widest opacity-60 mb-1">Peor DIFOT Detectado</p>
+<p class="text-lg font-semibold" id="insight-worst-difot">Cargill S.A. (62%)</p>
 </div>
+<div class="border-l-2 border-secondary-fixed pl-4">
+<p class="text-xs uppercase tracking-widest opacity-60 mb-1">Mayor Recurrencia</p>
+<p class="text-lg font-semibold" id="insight-max-freq">Nestlé Logistics</p>
 </div>
+<div class="border-l-2 border-error pl-4">
+<p class="text-xs uppercase tracking-widest opacity-60 mb-1">Alerta de Fuga</p>
+<p class="text-lg font-semibold" id="insight-drop">Unilever (-24% vol)</p>
 </div>
-<!-- Charts Row -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-<!-- Sales Performance -->
-<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
-<div class="flex items-center justify-between mb-8">
-<h3 class="font-bold text-lg text-on-surface">Sales Performance</h3>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
-</div>
-<div class="h-48 flex items-end justify-between gap-1 px-2 relative">
-<!-- Simulated Line Chart -->
-<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none">
-<path d="M0 160 Q 50 140, 100 150 T 200 100 T 300 80 T 400 40" fill="none" stroke="#00236f" stroke-linecap="round" stroke-width="3"></path>
-<path d="M0 160 Q 50 140, 100 150 T 200 100 T 300 80 T 400 40 V 200 H 0 Z" fill="url(#grad1)" opacity="0.1"></path>
-<defs>
-<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" style="stop-color:#00236f;stop-opacity:1"></stop>
-<stop offset="100%" style="stop-color:#00236f;stop-opacity:0"></stop>
-</lineargradient>
-</defs>
-</svg>
-<div class="w-full mt-48 flex justify-between text-[10px] text-on-surface-variant font-bold uppercase">
-<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span>
-</div>
-</div>
-</div>
-<!-- Monthly Acquisition -->
-<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
-<div class="flex items-center justify-between mb-8">
-<h3 class="font-bold text-lg text-on-surface">Monthly Acquisition</h3>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
-</div>
-<div class="h-48 flex items-end justify-around gap-2 px-2">
-<div class="w-full bg-secondary-container rounded-t-sm h-[40%]"></div>
-<div class="w-full bg-secondary-container rounded-t-sm h-[60%]"></div>
-<div class="w-full bg-primary rounded-t-sm h-[85%]"></div>
-<div class="w-full bg-secondary-container rounded-t-sm h-[50%]"></div>
-<div class="w-full bg-secondary-container rounded-t-sm h-[70%]"></div>
-<div class="w-full bg-secondary-container rounded-t-sm h-[95%]"></div>
-</div>
-<div class="mt-4 flex justify-between text-[10px] text-on-surface-variant font-bold uppercase">
-<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
-</div>
-</div>
-<!-- Segmentation -->
-<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
-<div class="flex items-center justify-between mb-8">
-<h3 class="font-bold text-lg text-on-surface">Segmentation</h3>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_vert</span>
-</div>
-<div class="flex flex-col items-center justify-center h-48 relative">
-<div class="w-32 h-32 rounded-full border-[12px] border-primary flex items-center justify-center">
-<div class="text-center">
-<span class="block text-2xl font-bold">64%</span>
-<span class="text-[10px] text-on-surface-variant uppercase font-bold">Enterprise</span>
-</div>
-</div>
-<div class="mt-6 flex gap-4">
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="text-[10px] font-bold uppercase text-on-surface-variant">Corp</span>
-</div>
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-secondary"></div>
-<span class="text-[10px] font-bold uppercase text-on-surface-variant">SME</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Bottom Row -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-<!-- Customer Insights Table -->
-<div class="lg:col-span-2 bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm overflow-hidden">
-<div class="flex items-center justify-between mb-8">
-<h3 class="font-bold text-lg text-on-surface">Customer Insights</h3>
-<button class="text-primary text-sm font-semibold hover:underline">View All Leads</button>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead>
-<tr class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-<th class="pb-6">Name</th>
-<th class="pb-6">Status</th>
-<th class="pb-6">Last Interaction</th>
-<th class="pb-6">Rep</th>
-<th class="pb-6 text-right">Value</th>
-</tr>
-</thead>
-<tbody class="text-sm font-medium">
-<tr class="group hover:bg-slate-50 transition-colors">
-<td class="py-4 flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
-</div>
-<span>Aurora Global</span>
-</td>
-<td class="py-4">
-<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
-</td>
-<td class="py-4 text-on-surface-variant">2 hours ago</td>
-<td class="py-4">M. Chen</td>
-<td class="py-4 text-right font-bold text-primary">$45,000</td>
-</tr>
-<tr class="group hover:bg-slate-50 transition-colors">
-<td class="py-4 flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-400 text-lg">corporate_fare</span>
-</div>
-<span>Vortex Tech</span>
-</td>
-<td class="py-4">
-<span class="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-bold rounded uppercase">Proposal</span>
-</td>
-<td class="py-4 text-on-surface-variant">Yesterday</td>
-<td class="py-4">S. Miller</td>
-<td class="py-4 text-right font-bold text-primary">$12,500</td>
-</tr>
-<tr class="group hover:bg-slate-50 transition-colors">
-<td class="py-4 flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
-</div>
-<span>Lumina Systems</span>
-</td>
-<td class="py-4">
-<span class="px-2 py-1 bg-orange-100 text-orange-700 text-[10px] font-bold rounded uppercase">Waiting</span>
-</td>
-<td class="py-4 text-on-surface-variant">3 days ago</td>
-<td class="py-4">M. Chen</td>
-<td class="py-4 text-right font-bold text-primary">$8,200</td>
-</tr>
-<tr class="group hover:bg-slate-50 transition-colors">
-<td class="py-4 flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
-</div>
-<span>Zenith Retail</span>
-</td>
-<td class="py-4">
-<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
-</td>
-<td class="py-4 text-on-surface-variant">1 week ago</td>
-<td class="py-4">K. Patel</td>
-<td class="py-4 text-right font-bold text-primary">$29,100</td>
-</tr>
-<tr class="group hover:bg-slate-50 transition-colors">
-<td class="py-4 flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-<span class="material-symbols-outlined text-slate-400 text-lg">domain</span>
-</div>
-<span>Nova Logistics</span>
-</td>
-<td class="py-4">
-<span class="px-2 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded uppercase">Cold</span>
-</td>
-<td class="py-4 text-on-surface-variant">2 weeks ago</td>
-<td class="py-4">S. Miller</td>
-<td class="py-4 text-right font-bold text-primary">$4,500</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- Follow-up Panel -->
-<div class="bg-surface-container-lowest p-6 rounded-[0.625rem] shadow-sm">
-<div class="flex items-center justify-between mb-8">
-<h3 class="font-bold text-lg text-on-surface">Follow-up Panel</h3>
-<span class="material-symbols-outlined text-primary cursor-pointer">add_circle</span>
-</div>
-<div class="space-y-4">
-<div class="p-4 rounded-lg bg-surface-container-low border-l-4 border-error">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-sm">Contract Renewal</h4>
-<span class="px-2 py-0.5 bg-error-container text-error text-[9px] font-bold rounded uppercase">Urgent</span>
-</div>
-<p class="text-xs text-on-surface-variant mb-3">Finalize Aurora Global terms for Q4.</p>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-xs">schedule</span>
-<span class="text-[10px] font-medium">Due in 2h</span>
-</div>
-</div>
-<div class="p-4 rounded-lg bg-surface-container-low border-l-4 border-primary">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-sm">Discovery Call</h4>
-<span class="px-2 py-0.5 bg-primary-fixed text-primary text-[9px] font-bold rounded uppercase">Pending</span>
-</div>
-<p class="text-xs text-on-surface-variant mb-3">Initial brief with Vortex Tech lead.</p>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-xs">schedule</span>
-<span class="text-[10px] font-medium">Tomorrow, 10 AM</span>
-</div>
-</div>
-<div class="p-4 rounded-lg bg-surface-container-low opacity-60">
-<div class="flex justify-between items-start mb-2">
-<h4 class="font-bold text-sm line-through">Report Export</h4>
-<span class="px-2 py-0.5 bg-slate-200 text-slate-600 text-[9px] font-bold rounded uppercase">Completed</span>
-</div>
-<p class="text-xs text-on-surface-variant mb-3">Monthly sales summary sent.</p>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-xs text-green-600">check_circle</span>
-<span class="text-[10px] font-medium">Done at 9 AM</span>
-</div>
-</div>
-</div>
-<button class="w-full mt-6 py-3 border-2 border-outline-variant border-dashed rounded-lg text-xs font-bold text-on-surface-variant hover:bg-slate-50 transition-colors">
-                        View Full Schedule
+<button class="w-full mt-4 bg-white/10 hover:bg-white/20 py-3 rounded-lg text-sm font-bold transition-colors backdrop-blur-sm border border-white/20">
+                        Generar Reporte Detallado
                     </button>
 </div>
 </div>
-</main>
+<!-- Bottom Row Bento -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<h3 class="text-lg font-bold text-primary mb-6">Top 10 Clientes: DIFOT Crítico</h3>
+<div class="h-[300px]">
+<canvas id="difotBarChart"></canvas>
 </div>
+</div>
+<div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+<h3 class="text-lg font-bold text-primary mb-6">Matriz: Recurrencia vs Volumen (CLV)</h3>
+<div class="h-[300px]">
+<canvas id="clvBubbleChart"></canvas>
+</div>
+</div>
+</section>
+<!-- Data Table -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-8 py-6 border-b border-surface-container flex justify-between items-center">
+<h3 class="text-xl font-bold text-primary">Resumen de Clientes Prioritarios</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-low text-primary text-sm font-bold rounded-lg hover:bg-surface-container-high transition-colors">Exportar CSV</button>
+<button class="px-4 py-2 bg-primary text-white text-sm font-bold rounded-lg hover:opacity-90 transition-colors">Ver Todos</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-4 text-xs font-bold text-outline uppercase tracking-wider">Nombre del Cliente</th>
+<th class="px-8 py-4 text-xs font-bold text-outline uppercase tracking-wider">DIFOT %</th>
+<th class="px-8 py-4 text-xs font-bold text-outline uppercase tracking-wider">Pedidos (6m)</th>
+<th class="px-8 py-4 text-xs font-bold text-outline uppercase tracking-wider">Volumen Total</th>
+<th class="px-8 py-4 text-xs font-bold text-outline uppercase tracking-wider">Estado CMR</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container" id="client-table-body">
+<!-- Data will be populated here -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-8 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">C</div>
+<span class="font-semibold text-on-surface">Cargill S.A.</span>
+</div>
+</td>
+<td class="px-8 py-4">
+<div class="flex items-center gap-2">
+<span class="text-error font-bold">62.4%</span>
+<span class="material-symbols-outlined text-error text-sm">trending_down</span>
+</div>
+</td>
+<td class="px-8 py-4 font-medium">142</td>
+<td class="px-8 py-4 font-medium">4.2M units</td>
+<td class="px-8 py-4">
+<span class="px-3 py-1 bg-error-container text-on-error-container text-xs font-bold rounded-full">En Riesgo</span>
+</td>
+</tr>
+<!-- Repeat rows... -->
+</tbody>
+</table>
+</div>
+</section>
+<!-- Hidden input for file upload simulation -->
+<div class="mt-12 p-8 bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl text-center">
+<span class="material-symbols-outlined text-4xl text-outline mb-4">upload_file</span>
+<h4 class="font-bold text-primary mb-2">Simular Carga de Datos Amcor</h4>
+<p class="text-sm text-on-surface-variant mb-6 max-w-md mx-auto">Selecciona un archivo Excel con la pestaña 'Data' para actualizar el tablero ejecutivo en tiempo real.</p>
+<input accept=".xlsx, .xls" class="hidden" id="excelInput" type="file"/>
+<label class="inline-block px-8 py-3 bg-primary text-white font-bold rounded-lg cursor-pointer hover:shadow-lg transition-all" for="excelInput">
+                Cargar Archivo Excel
+            </label>
+</div>
+</main>
+<script>
+        // Default Mock Data for initialization
+        const mockData = [
+            { name: "Nestlé Logistics", difot: 94.2, orders: 256, volume: 8.4, recurrence: 9.2, clv: 9.5, prev_orders: 240 },
+            { name: "Unilever Latam", difot: 88.5, orders: 198, volume: 12.1, recurrence: 8.8, clv: 9.1, prev_orders: 260 },
+            { name: "Coca-Cola FEMSA", difot: 91.0, orders: 184, volume: 15.6, recurrence: 7.9, clv: 8.9, prev_orders: 190 },
+            { name: "Cargill S.A.", difot: 62.4, orders: 142, volume: 4.2, recurrence: 6.5, clv: 5.4, prev_orders: 145 },
+            { name: "P&G Regional", difot: 89.8, orders: 124, volume: 5.8, recurrence: 7.2, clv: 7.8, prev_orders: 110 },
+            { name: "Bimbo Group", difot: 78.3, orders: 115, volume: 3.9, recurrence: 8.1, clv: 7.2, prev_orders: 120 },
+            { name: "PepsiCo Ops", difot: 85.5, orders: 98, volume: 9.2, recurrence: 6.8, clv: 8.1, prev_orders: 105 },
+            { name: "Mondelez Intl", difot: 72.1, orders: 86, volume: 2.7, recurrence: 5.4, clv: 4.9, prev_orders: 95 },
+            { name: "Danone S.A.", difot: 92.4, orders: 74, volume: 1.8, recurrence: 7.0, clv: 6.8, prev_orders: 70 },
+            { name: "Heineken Corp", difot: 81.9, orders: 62, volume: 3.1, recurrence: 6.2, clv: 5.9, prev_orders: 68 }
+        ];
+
+        // Chart instances
+        let frequencyChart, difotBarChart, clvBubbleChart;
+
+        function initCharts(data) {
+            const ctxFreq = document.getElementById('frequencyChart').getContext('2d');
+            const ctxDifot = document.getElementById('difotBarChart').getContext('2d');
+            const ctxBubble = document.getElementById('clvBubbleChart').getContext('2d');
+
+            // 1. Frequency Comparison Chart
+            if(frequencyChart) frequencyChart.destroy();
+            frequencyChart = new Chart(ctxFreq, {
+                type: 'line',
+                data: {
+                    labels: data.slice(0,6).map(d => d.name),
+                    datasets: [
+                        {
+                            label: 'Periodo Actual',
+                            data: data.slice(0,6).map(d => d.orders),
+                            borderColor: '#003e6f',
+                            backgroundColor: 'rgba(0, 62, 111, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'Periodo Anterior',
+                            data: data.slice(0,6).map(d => d.prev_orders),
+                            borderColor: '#c1c7d2',
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { border: { display: false }, grid: { color: '#eceef0' } },
+                        x: { border: { display: false }, grid: { display: false } }
+                    }
+                }
+            });
+
+            // 2. Worst DIFOT Bar Chart
+            const sortedDifot = [...data].sort((a,b) => a.difot - b.difot).slice(0,10);
+            if(difotBarChart) difotBarChart.destroy();
+            difotBarChart = new Chart(ctxDifot, {
+                type: 'bar',
+                data: {
+                    labels: sortedDifot.map(d => d.name),
+                    datasets: [{
+                        data: sortedDifot.map(d => d.difot),
+                        backgroundColor: sortedDifot.map(d => d.difot < 75 ? '#642d00' : '#005696'),
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { max: 100, border: { display: false } },
+                        y: { border: { display: false }, grid: { display: false } }
+                    }
+                }
+            });
+
+            // 3. CLV Bubble Chart
+            if(clvBubbleChart) clvBubbleChart.destroy();
+            clvBubbleChart = new Chart(ctxBubble, {
+                type: 'bubble',
+                data: {
+                    datasets: [{
+                        label: 'Clientes',
+                        data: data.map(d => ({
+                            x: d.recurrence,
+                            y: d.volume,
+                            r: d.clv * 2.5
+                        })),
+                        backgroundColor: 'rgba(61, 106, 0, 0.5)',
+                        borderColor: '#3d6a00',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Índice de Recurrencia' }, border: { display: false } },
+                        y: { title: { display: true, text: 'Volumen (M Units)' }, border: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function updateTable(data) {
+            const container = document.getElementById('client-table-body');
+            container.innerHTML = '';
+            
+            data.forEach(client => {
+                const statusClass = client.difot < 80 ? 'bg-error-container text-on-error-container' : 'bg-secondary-container text-on-secondary-container';
+                const statusLabel = client.difot < 80 ? 'En Riesgo' : 'Saludable';
+                const difotColor = client.difot < 80 ? 'text-error' : 'text-primary';
+                
+                const row = `
+                    <tr class="hover:bg-surface-container-low transition-colors group">
+                        <td class="px-8 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">${client.name.charAt(0)}</div>
+                                <span class="font-semibold text-on-surface">${client.name}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-4">
+                            <div class="flex items-center gap-2">
+                                <span class="${difotColor} font-bold">${client.difot}%</span>
+                                <span class="material-symbols-outlined ${difotColor} text-sm">${client.difot < 85 ? 'trending_down' : 'trending_up'}</span>
+                            </div>
+                        </td>
+                        <td class="px-8 py-4 font-medium">${client.orders}</td>
+                        <td class="px-8 py-4 font-medium">${client.volume}M units</td>
+                        <td class="px-8 py-4">
+                            <span class="px-3 py-1 ${statusClass} text-xs font-bold rounded-full">${statusLabel}</span>
+                        </td>
+                    </tr>
+                `;
+                container.innerHTML += row;
+            });
+        }
+
+        function updateInsights(data) {
+            const worst = [...data].sort((a,b) => a.difot - b.difot)[0];
+            const maxFreq = [...data].sort((a,b) => b.recurrence - a.recurrence)[0];
+            const drop = [...data].sort((a,b) => (a.orders - a.prev_orders) - (b.orders - b.prev_orders))[0];
+
+            document.getElementById('insight-worst-difot').textContent = `${worst.name} (${worst.difot}%)`;
+            document.getElementById('insight-max-freq').textContent = maxFreq.name;
+            const dropPct = Math.round(((drop.orders - drop.prev_orders) / drop.prev_orders) * 100);
+            document.getElementById('insight-drop').textContent = `${drop.name} (${dropPct}% vol)`;
+        }
+
+        // Excel Handling Logic
+        document.getElementById('excelInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const data = evt.target.result;
+                const workbook = XLSX.read(data, { type: 'binary' });
+                const sheetName = 'Data';
+                
+                if (workbook.Sheets[sheetName]) {
+                    const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                    // Map your excel columns here (Placeholder mapping)
+                    const mappedData = jsonData.map(row => ({
+                        name: row['Cliente'] || 'N/A',
+                        difot: row['D DIFOT_YTD_LT'] ? (row['D DIFOT_YTD_LT'] * 100).toFixed(1) : 0,
+                        orders: row['Pedidos_6m'] || 0,
+                        volume: row['Volumen_M'] || 0,
+                        recurrence: row['Recurrencia_Score'] || 0,
+                        clv: row['CLV_Proxy'] || 0,
+                        prev_orders: row['Pedidos_Prev'] || 0
+                    }));
+                    refreshDashboard(mappedData);
+                } else {
+                    alert('No se encontró la pestaña "Data" en el archivo.');
+                }
+            };
+            reader.readAsBinaryString(file);
+        });
+
+        function refreshDashboard(data) {
+            initCharts(data);
+            updateTable(data);
+            updateInsights(data);
+            
+            // Update KPIs
+            const avgDifot = (data.reduce((acc, curr) => acc + parseFloat(curr.difot), 0) / data.length).toFixed(1);
+            document.getElementById('kpi-difot').textContent = avgDifot + '%';
+        }
+
+        // Initial Load
+        window.onload = () => {
+            refreshDashboard(mockData);
+        };
+    </script>
 </body></html>
